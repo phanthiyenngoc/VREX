@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import getImageUrl from "../../utils/getImage";
 import { css } from "@emotion/react";
+import { Link } from "react-router-dom";
 
 ListingBox.propTypes = {
   item: PropTypes.object,
@@ -9,45 +10,47 @@ ListingBox.propTypes = {
 function ListingBox(props) {
   const { item } = props;
   return (
-    <div
-      css={css`
-        max-width: 280px;
-      `}
-    >
-      <img
+    <Link to={`/listing/${item.id}`}>
+      <div
         css={css`
-          width: 100%;
-          height: 157px;
-          object-fit: cover;
-          border-radius: 8px;
+          max-width: 280px;
         `}
-        src={getImageUrl(item.avatarUrl, 280)}
-        alt=""
-      />
-      <div>
-        <span>{item.price}</span>
-        <p>{item.name}</p>
-        <span></span>
+      >
+        <img
+          css={css`
+            width: 100%;
+            height: 157px;
+            object-fit: cover;
+            border-radius: 8px;
+          `}
+          src={getImageUrl(item.avatarUrl, 280)}
+          alt=""
+        />
         <div>
+          <span>{item.price}</span>
+          <p>{item.name}</p>
+          <span></span>
           <div>
-            <img src="" alt="" />
-            <span></span>
-          </div>
-          <div>
-            <img src="" alt="" />
-            <span></span>
-          </div>
-          <div>
-            <img src="" alt="" />
-            <span></span>
-          </div>
-          <div>
-            <img src="" alt="" />
-            <span></span>
+            <div>
+              <img src="" alt="" />
+              <span></span>
+            </div>
+            <div>
+              <img src="" alt="" />
+              <span></span>
+            </div>
+            <div>
+              <img src="" alt="" />
+              <span></span>
+            </div>
+            <div>
+              <img src="" alt="" />
+              <span></span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

@@ -9,12 +9,17 @@ import icon from "../../assets/Image/Header/Group 13256.png";
 // import { SvgIcon } from "@mui/material";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import { css } from "@emotion/react";
+import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const AppHeader = () => {
-  const Alert = () => {
-    alert("aaaa");
-  };
+  // const navigate = useNavigate();
+  // const goToHome = () => {
+  //   navigate("/tin-tuc");
+  // };
+
   const theme = useTheme();
+
   return (
     <header>
       <Container>
@@ -26,9 +31,12 @@ const AppHeader = () => {
             padding: 0 20px;
           `}
         >
-          <div>
+          {/* <div onClick={() => goToHome()}>
             <img src={logo} alt="logo" />
-          </div>
+          </div> */}
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
           <ul
             css={css`
               display: flex;
@@ -139,23 +147,24 @@ const AppHeader = () => {
                 padding: 8px;
               `}
             >
-              <Typography
-                vairiant="subtitle2"
-                component="a"
-                href="!#"
-                css={css`
-                  text-decoration: none;
-                  color: #1f1f1f;
-                  padding-right: 16px;
-                  &:hover {
-                    text-shadow: 1px 0 0 currentColor;
-                  }
-                `}
-              >
-                Thông tin
-              </Typography>
+              <Link to="/tin-tuc">
+                <Typography
+                  vairiant="subtitle2"
+                  component="a"
+                  css={css`
+                    text-decoration: none;
+                    color: #1f1f1f;
+                    padding-right: 16px;
+                    &:hover {
+                      text-shadow: 1px 0 0 currentColor;
+                    }
+                  `}
+                >
+                  Thông tin
+                </Typography>
 
-              <img src={arrow_down} alt="" />
+                <img src={arrow_down} alt="" />
+              </Link>
             </li>
             <li
               css={css`
@@ -185,7 +194,6 @@ const AppHeader = () => {
               <CommonButton
                 startIcon={<BorderColorOutlinedIcon />}
                 variant={"outlined"}
-                onClick={Alert}
                 css={css`
                   text-align: center;
                   color: ${theme.palette.primary.main};

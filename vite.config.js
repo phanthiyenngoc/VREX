@@ -19,4 +19,10 @@ export default defineConfig({
       },
     }),
   ],
+  esbuild: {
+    jsxInject: `import React from 'react'`,
+    include: /\.(tsx?|jsx?)$/,
+    exclude: [],
+    loader: "tsx",
+  },
 });
