@@ -1,16 +1,88 @@
 import PropTypes from "prop-types";
-import getImageUrl from "../../utils/getImage.js";
+import getImageUrl from "../../utils/getImage";
+import Box from "@mui/material/Box";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper";
+import "swiper/css";
+import { css } from "@emotion/react";
+import ContainerContent from "../common/ContainerContent";
+import { Typography } from "@mui/material";
+
+import SearchBanner from "./SearchBanner";
 
 const TopBanner = (props) => {
-  console.log("props   ", props.homeTopBanners);
   const { homeTopBanners } = props;
 
   return (
-    <div>
-      {homeTopBanners.map((p, index) => (
-        <img src={getImageUrl(p.bannerUrl)} key={index} />
-      ))}
-    </div>
+    <>
+      <Box
+        css={css`
+          position: relative;
+        `}
+      >
+        <Swiper
+          slidesPerView={1}
+          autoplay={{
+            delay: 2500,
+          }}
+          modules={[Autoplay]}
+        >
+          {homeTopBanners.map((p, index) => (
+            <SwiperSlide key={index}>
+              <img
+                src={getImageUrl(p.bannerUrl, 1920)}
+                css={css`
+                  width: 100%;
+                `}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        <ContainerContent>
+          <section
+            css={css`
+              position: relative;
+            `}
+          >
+            <Box
+              css={css`
+                width: 100%;
+                position: absolute;
+                left: 0;
+                top: -150px;
+                z-index: 99;
+              `}
+            >
+              <Typography
+                variant="h4"
+                component={"h4"}
+                css={css`
+                  max-width: 408px;
+                  margin-bottom: 40px;
+                  color: white;
+                `}
+              >
+                Nền tảng Bất Động Sản công nghệ 4.0
+              </Typography>
+            </Box>
+          </section>
+        </ContainerContent>
+      </Box>
+
+      <ContainerContent>
+        <Box
+          css={css`
+            position: relative;
+            top: -48px;
+            z-index: 99;
+          `}
+        >
+          <SearchBanner />
+        </Box>
+      </ContainerContent>
+    </>
   );
 };
 
@@ -18,8 +90,8 @@ TopBanner.propTypes = {
   homeTopBanners: PropTypes.array.isRequired,
 };
 
-// TopBanner.defaultProps = {
-//   homeTopBanners: [],
-// };
+TopBanner.defaultProps = {
+  homeTopBanners: [],
+};
 
 export default TopBanner;

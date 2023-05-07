@@ -5,7 +5,8 @@ export const light = {
     mode: "light",
     primary: {
       main: "#8D18AF",
-      light: "#74C044",
+      // light: "#74C044",
+      dark: "#47005d",
     },
     secondary: {
       main: "#F37506",
