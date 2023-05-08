@@ -11,8 +11,14 @@ import { Typography } from "@mui/material";
 
 import SearchBanner from "./SearchBanner";
 
+import { UserContext } from "../../contexts/user";
+import { useContext } from "react";
+
 const TopBanner = (props) => {
   const { homeTopBanners } = props;
+
+  const user = useContext(UserContext);
+  console.log("user TopBanner", user);
 
   return (
     <>

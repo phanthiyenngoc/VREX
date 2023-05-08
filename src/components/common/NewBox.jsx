@@ -24,6 +24,10 @@ function NewBox(props) {
           width: ${width}px;
           height: ${height}px;
           border-radius: 8px;
+          transition: all 2s ease;
+          &:hover {
+            transform: scale(1.5);
+          }
         `}
         src={getImageUrl(news.avatarUrl, width)}
         alt=""

@@ -12,6 +12,7 @@ import NewListing from "../../components/home/NewListing.jsx";
 import HotNews from "../../components/home/HotNews.jsx";
 import MiddleBanner from "../../components/home/MiddleBanner.jsx";
 import MiddleBanner2 from "../../components/home/MiddleBanner2.jsx";
+import Support from "../../components/home/Support.jsx";
 
 const HomePage = () => {
   const [homePageData, setHomePageData] = useState({});
@@ -45,21 +46,19 @@ const HomePage = () => {
     callHomeAPI();
   }, []);
 
-  console.log("homeData", homePageData);
-
   return (
     <>
       {homePageData.banners && <TopBanner homeTopBanners={homePageData.banners.homeTopBanners} />}
-      {homePageData.projects && <TopProject projects={homePageData.projects} />}
-      {/* {homeData.listings && <TopProduct listings={homeData.listings} />} */}
-      {homePageData.banners && <MiddleBanner homeMiddle1Banner={homePageData.banners.homeMiddle1Banner} />}
 
+      {homePageData.projects && <TopProject projects={homePageData.projects} />}
+      {homePageData.banners && <MiddleBanner homeMiddle1Banner={homePageData.banners.homeMiddle1Banner} />}
       {homePageData.listings && homePageData.listings.length >= 1 && <HotListing listListing={homePageData.listings[0].items} />}
       {homePageData.listings && homePageData.listings.length >= 2 && <RentListing listListing={homePageData.listings[1].items} />}
       {homePageData.banners && homePageData.banners.homeMiddle2Banners.length > 0 && <MiddleBanner2 homeMiddleBanner2={homePageData.banners.homeMiddle2Banners} />}
       {homePageData.listings && homePageData.listings.length >= 3 && <TransferToListing listListing={homePageData.listings[2].items} />}
       {homePageData.listings && homePageData.listings.length >= 4 && <NewListing listListing={homePageData.listings[3].items} />}
       {homePageData.news && <HotNews news={homePageData.news.items} />}
+      <Support />
     </>
   );
 };

@@ -100,6 +100,8 @@ function ProjectBox(props) {
           css={css`
             color: #f37506;
             min-height: 31px;
+            margin-top: 12px;
+            margin-bottom: 8px;
           `}
         >
           {price && (
@@ -112,6 +114,7 @@ function ProjectBox(props) {
           css={css`
             color: #1f1f1f;
             font-weight: 700;
+            margin: 8px 0;
           `}
           variant="subtitle1"
           component={"h6"}
@@ -147,6 +150,7 @@ function ProjectBox(props) {
             color: #757575;
 
             color: #757575;
+            margin: 8px 0;
           `}
         >
           <img src={building} alt="" />
