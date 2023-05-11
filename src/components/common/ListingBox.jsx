@@ -3,7 +3,7 @@ import getImageUrl from "../../utils/getImage";
 import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
-import { formatNumber } from "../../utils/format";
+import { toVietNameseCurrencyFormat } from "../../utils/format";
 import AspectRatioOutlinedIcon from "@mui/icons-material/AspectRatioOutlined";
 import SingleBedOutlinedIcon from "@mui/icons-material/SingleBedOutlined";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
@@ -82,22 +82,25 @@ function ListingBox(props) {
                 color: #f37506;
               `}
             >
-              {formatNumber(item.price)}Tỷ
+              {toVietNameseCurrencyFormat(item.price)}
             </Typography>
-            <Typography
-              variant="Body2"
-              component={"span"}
-              css={css`
-                font-family: "SFU Eurostile";
-                font-style: normal;
-                font-weight: 700;
-                font-size: 16px;
-                line-height: 20px;
-                color: #f37506;
-              `}
-            >
-              {formatNumber(item.price)}₫/m<sup>2</sup>
-            </Typography>
+            {item.price && item.areaSquare && (
+              <Typography
+                variant="Body2"
+                component={"span"}
+                css={css`
+                  font-family: "SFU Eurostile";
+                  font-style: normal;
+                  font-weight: 700;
+                  font-size: 16px;
+                  line-height: 20px;
+                  color: #f37506;
+                `}
+              >
+                {toVietNameseCurrencyFormat(item.price / item.areaSquare)}/m
+                <sup>2</sup>
+              </Typography>
+            )}
           </div>
 
           <Typography

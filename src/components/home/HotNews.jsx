@@ -1,7 +1,7 @@
 import { Typography, css } from "@mui/material";
 import PropTypes from "prop-types";
 import ContainerContent from "../common/ContainerContent";
-import NewBox from "../common/NewBox";
+import NewsBox from "../common/NewsBox";
 import icon from "../../assets/Image/hotNew/Group 13110.svg";
 
 HotNews.propTypes = {
@@ -29,7 +29,7 @@ function HotNews(props) {
             `}
           >
             <img src={icon} alt="" />
-            <Typography CSS={css``} variant="h5" component={"h5"}>
+            <Typography variant="h5" component={"h5"}>
               Thông tin nổi bật
             </Typography>
           </div>
@@ -48,7 +48,7 @@ function HotNews(props) {
                   height: 440px;
                 `}
               >
-                <NewBox
+                <NewsBox
                   css={css`
                     border-radius: 8px;
                   `}
@@ -76,7 +76,7 @@ function HotNews(props) {
                       border-radius: 8px;
                     `}
                   >
-                    <NewBox
+                    <NewsBox
                       css={css`
                         gap: 20px;
                       `}
@@ -87,9 +87,6 @@ function HotNews(props) {
                   </div>
                 ))}
               </div>
-              {/* {news.map((item) => (
-              <NewBox news={item} key={item.id} />
-            ))} */}
             </div>
           </div>
         </>

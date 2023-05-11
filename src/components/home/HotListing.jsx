@@ -39,7 +39,7 @@ const HotListing = (props) => {
               `}
             >
               <img src={icon} alt="" />
-              <Typography CSS={css``} variant="h5" component={"h5"}>
+              <Typography css={css``} variant="h5" component={"h5"}>
                 Các sản phẩm mua bán nổi bật
               </Typography>
             </div>

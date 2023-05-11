@@ -34,7 +34,7 @@ const NewListing = (props) => {
             `}
           >
             <img src={icon} alt="" />
-            <Typography CSS={``} variant="h5" component={"h5"}>
+            <Typography variant="h5" component={"h5"}>
               Các sản phẩm mới
             </Typography>
           </div>

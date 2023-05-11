@@ -33,7 +33,7 @@ function TopProject(props) {
               `}
             >
               <img src={icon} alt="" />
-              <Typography CSS={``} variant="h5" component={"h5"}>
+              <Typography variant="h5" component={"h5"}>
                 Các dự án nổi bật
               </Typography>
             </div>

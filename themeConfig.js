@@ -78,6 +78,10 @@ export const light = {
       lineHeight: "1.5em",
       letterSpacing: "0.05em",
     },
+    h4: {
+      lineHeight: "1.5em",
+      letterSpacing: "0.05em",
+    },
     h5: {
       lineHeight: "1.5em",
       letterSpacing: "0.05em",

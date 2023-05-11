@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 import onSale from "../../assets/Image/TopProject/1 (1).svg";
 import comingSoon from "../../assets/Image/TopProject/2 (1).svg";
 import sold from "../../assets/Image/TopProject/3 (1).svg";
-import { formatNumber } from "../../utils/format";
+import { toVietNameseCurrencyFormat } from "../../utils/format";
 import IconButton from "@mui/material/IconButton";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import address from "../../assets/Image/TopProject/icon-address.svg";
@@ -28,10 +28,12 @@ function ProjectBox(props) {
 
   let price = "";
   if (itemData.minUnitPrice) {
-    price = `Giá từ ${formatNumber(itemData.minUnitPrice)}`;
+    price = `Giá từ ${toVietNameseCurrencyFormat(itemData.minUnitPrice)}`;
   }
   if (itemData.maxUnitPrice) {
-    price = `Giá từ ${formatNumber(itemData.minUnitPrice)} ~  ${formatNumber(itemData.minUnitPrice)}`;
+    price = `Giá từ ${toVietNameseCurrencyFormat(
+      itemData.minUnitPrice
+    )} ~  ${toVietNameseCurrencyFormat(itemData.maxUnitPrice)}`;
   }
   return (
     <div
@@ -106,7 +108,7 @@ function ProjectBox(props) {
         >
           {price && (
             <>
-              {price}₫/m<sup>2</sup>
+              {price}/m<sup>2</sup>
             </>
           )}
         </Typography>
