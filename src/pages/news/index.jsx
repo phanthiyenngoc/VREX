@@ -21,7 +21,7 @@ import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeft
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { css } from "@emotion/react";
-import NewBox2 from "../../components/common/NewBox2";
+import NewsBox2 from "../../components/common/NewsBox2";
 import getImageUrl from "../../utils/getImage";
 import { Typography } from "@mui/material";
 import RightCategory from "../../components/common/RightCategory";
@@ -60,7 +60,7 @@ const RenderNews = (props) => {
         >
           {array.map((item) => (
             <SwiperSlide key={item.id}>
-              <NewBox2 news={item} width={260} />
+              <NewsBox2 news={item} width={260} />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -3,7 +3,7 @@ import { lazy } from "react";
 import ErrorPage from "../pages/Error";
 import Loader from "../components/common/Loader";
 
-const HomeLayout = lazy(() => import("../layouts/HomeLayout.jsx"));
+const HomeLayout = lazy(() => import("../layouts/HomeLayout.jsx")); //lười khi nào cần mới tải component
 const HomePage = lazy(() => import("../pages/home/index.jsx"));
 const NewsPage = lazy(() => import("../pages/news/index.jsx"));
 const NewsDetail = lazy(() => import("../pages/news/detail.jsx"));
@@ -54,6 +54,7 @@ const router = createBrowserRouter(
             </Loader>
           ),
         },
+
         {
           path: "/listing/:listingId",
           element: (

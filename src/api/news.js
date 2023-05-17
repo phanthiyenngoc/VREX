@@ -6,7 +6,17 @@ export function getNewsDetail(newsId) {
   return http({
     url: `/api/services/app/Post/GetDetailDto?id=${newsId}`,
     method: "get",
-    postId: newsId,
+  });
+}
+
+export function getPostCategoryDetail(newsCategoryId) {
+  //tin tuc/id
+  return http({
+    url: `/api/services/app/postCategory/GetDetailDto?id=${newsCategoryId}`,
+    method: "get",
+    params: {
+      id: newsCategoryId,
+    },
   });
 }
 
@@ -34,7 +44,7 @@ export function getAllPostCategory() {
 export function getUIRelatedPostList(newsId) {
   //tcác tin lien quan
   return http({
-    url: `/api/services/app/Post/GetUIRelatedPostList?id=${newsId}`,
+    url: `/api/services/app/Post/GetUIRelatedPostList`,
     method: "get",
     params: {
       postId: newsId,
@@ -64,27 +74,28 @@ export function getUIPostCategoryList() {
   });
 }
 
-export function getUIPostViewMore() {
-  //tin xem nhiu nhat
+export function getUIPostViewMore(newsid) {
+  //tin thị trường news-category
   return http({
-    url: `/api/services/app/Post/GetUIPostViewMore`,
+    url: `/api/services/app/Post/GetUIPostViewMore/?id=${newsid}`,
     method: "get",
     params: {
+      postId: newsid,
       take: 5,
     },
   });
 }
 
-export function getUIPostList(newsCategoryId) {
-  //tin thị trường news-category
+export function getUIPostList(postCategoryId, page, rowsPerPage) {
+  //Danh sách bài viết
   return http({
-    url: `api/services/app/Post/GetUIPostList?id=${newsCategoryId}`,
+    url: `/api/services/app/Post/GetUIPostList`,
     method: "get",
     params: {
-      take: 5,
-      postId: newsCategoryId,
-      rowsPerPage: 10,
-      postCategoryId: 2,
+      postCategoryId: postCategoryId,
+      postType: 0, //loại bài post
+      page: page, // trang hiện tại
+      rowsPerPage: rowsPerPage, // so luong item trong 1 trang
     },
   });
 }

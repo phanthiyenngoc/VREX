@@ -3,12 +3,12 @@ import { Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 import IconButton from "@mui/material/IconButton";
-import Stack from "@mui/material/Stack";
-import getImageUrl from "../../utils/getImage";
+
 import { Link } from "react-router-dom";
 
-const RightCategory = (props) => {
+function RightCategory(props) {
   const { postCategory } = props;
+
   if (!postCategory || postCategory.length == 0) return <></>;
 
   return (
@@ -39,65 +39,84 @@ const RightCategory = (props) => {
         if (p.children.length == 0) {
           return (
             <div key={index}>
-              <Link to={`/danh-muc-tin-tuc/${postCategory.newsCategoryId}`}>
-                <div>
-                  <p
-                    css={css`
-                      padding: 6px 0;
-                      margin-bottom: 4px;
-                      &:hover {
-                        color: red;
-                        cursor: pointer;
-                      }
-                    `}
-                  >
-                    {p.name}
-                  </p>
-                </div>
-              </Link>
+              <div key={p.id}>
+                <Link to={`/danh-muc-tin-tuc/${p.id}`}>
+                  <div>
+                    <p
+                      css={css`
+                        padding: 6px 0;
+                        margin-bottom: 4px;
+                        &:hover {
+                          color: red;
+                          cursor: pointer;
+                        }
+                      `}
+                    >
+                      {p.name}
+                    </p>
+                  </div>
+                </Link>
+              </div>
             </div>
           );
         }
 
         return (
           <div key={index}>
-            <p
+            <Link
               css={css`
-                padding: 6px 0;
-                margin-bottom: 4px;
-                &:hover {
-                  color: red;
-                  cursor: pointer;
-                }
+                text-decoration: none;
               `}
+              to={`/danh-muc-tin-tuc/${p.id}`}
             >
-              {p.name}
-            </p>
-            {p.children.map((item, itemIndex) => (
-              <div
+              <p
                 css={css`
-                  display: flex;
-                  align-items: center;
+                  padding: 6px 0;
+                  margin-bottom: 4px;
+                  &:hover {
+                    color: red;
+                    cursor: pointer;
+                  }
                 `}
-                key={itemIndex}
               >
-                <IconButton color="#757575" aria-label="add an alarm">
-                  <KeyboardArrowRightOutlinedIcon />
-                </IconButton>
+                {p.name}
+              </p>
+            </Link>
 
-                <p
-                  key={itemIndex}
+            {p.children.map((item, itemIndex) => (
+              <div key={itemIndex}>
+                <Link
                   css={css`
-                    padding: 6px 0;
-
-                    &:hover {
-                      color: red;
-                      cursor: pointer;
-                    }
+                    text-decoration: none;
                   `}
+                  to={`/danh-muc-tin-tuc/${item.id}`}
                 >
-                  {item.name}
-                </p>
+                  {" "}
+                  <div
+                    css={css`
+                      display: flex;
+                      align-items: center;
+                    `}
+                  >
+                    <IconButton color="#757575" aria-label="add an alarm">
+                      <KeyboardArrowRightOutlinedIcon />
+                    </IconButton>
+
+                    <p
+                      key={itemIndex}
+                      css={css`
+                        padding: 6px 0;
+
+                        &:hover {
+                          color: red;
+                          cursor: pointer;
+                        }
+                      `}
+                    >
+                      {item.name}
+                    </p>
+                  </div>
+                </Link>
               </div>
             ))}
           </div>
@@ -105,10 +124,11 @@ const RightCategory = (props) => {
       })}
     </div>
   );
-};
+}
 
 RightCategory.propTypes = {
   postCategory: PropTypes.array,
+  newsList3: PropTypes.object,
 };
 
 export default RightCategory;

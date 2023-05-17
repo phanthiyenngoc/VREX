@@ -12,15 +12,18 @@ import RightTopic from "../../components/common/RightTopic";
 import RightNewsBox from "../../components/common/RightNewsBox";
 import { useEffect, useState } from "react";
 import {
-  getUIPostCategoryList,
+  getPostCategoryDetail,
+  getUIPostList,
   getUIPostViewMore,
   getAllPostCategory,
   getPostTags,
 } from "../../api/news";
 import { css } from "@emotion/react";
-import icon from "../../assets/Image/newBox/Group 13110.svg";
 import { Typography } from "@mui/material";
-import NewBox3 from "../../components/common/NewBox3";
+import NewsBox3 from "../../components/common/NewsBox3";
+import getImageUrl from "../../utils/getImage";
+
+import Pagination from "@mui/material/Pagination";
 
 NewsCategory.propTypes = {
   newsList: PropTypes.array,
@@ -28,34 +31,73 @@ NewsCategory.propTypes = {
 
 function NewsCategory() {
   let { newsCategoryId } = useParams();
+  const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
   const [data, setData] = useState({});
+  const rowsPerPage = 10;
+
   const callAPI = async () => {
     try {
-      const [newsList, viewMore, postCategory, postTags] = await Promise.all([
-        getUIPostCategoryList(),
-        // getUIPostList(),
-        getUIPostViewMore(),
-        getAllPostCategory(),
-        getPostTags(),
-      ]);
+      setPage(1);
+      const [newsCategory, newsList, viewMore, postCategory, postTags] =
+        await Promise.all([
+          getPostCategoryDetail(newsCategoryId),
+          getUIPostList(newsCategoryId, page, rowsPerPage),
+          getUIPostViewMore(),
+          getAllPostCategory(),
+          getPostTags(),
+        ]);
 
       const result = {
+        newsCategory: newsCategory.data.result, // Thông tin danh mục
         newsList: newsList.data.result, // Danh sách tin tức
-        // postList: postList.data.result, //tin thị trường news-category
         viewMore: viewMore.data.result, // Tin xem nhiều
         postCategory: postCategory.data.result, //Danh mục
         postTags: postTags.data.result, //Chủ đề được quan tâm
       };
-      console.log(result);
+
+      setTotalCount(result.newsList.totalCount);
       setData(result);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleChange = (event, currentPage) => {
+    setPage(currentPage);
+    try {
+      getUIPostList(newsCategoryId, currentPage, rowsPerPage).then((resp) => {
+        //cách 1: set lại state và dùng lại data cũ
+        // setData(prev=>(
+        //   {
+        //     ...prev,
+        //     newsList:resp.data.result
+        //   }
+        // ));
+
+        //cách 2: set lại state và dùng lại data cũ
+        const object = { ...data, newsList: resp.data.result };
+        setData(object);
+        //diễn giải
+        //const object = {
+        // newsCategory: newsCategory.data.result, // Thông tin danh mục
+        // newsList: newsList.data.result, // Danh sách tin tức //10 item
+        // viewMore: viewMore.data.result, // Tin xem nhiều
+        // postCategory: postCategory.data.result, //Danh mục
+        // postTags: postTags.data.result, //Chủ đề được quan tâm
+        // ===============================================
+        // newsList: resp.data.result // 3 item
+        // newsList: resp.data.result // 4 item
+        // }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     callAPI();
-  }, []);
+  }, [newsCategoryId]);
 
   return (
     <div
@@ -68,33 +110,48 @@ function NewsCategory() {
           <Grid container spacing={6}>
             <Grid item xs={8}>
               <div>
-                <div
-                  css={css`
-                    display: flex;
-                    gap: 12px;
-                  `}
-                >
-                  <img src={icon} alt="" />
-                  <Typography
-                    variant="h3"
-                    component={"h3"}
+                {data && data.newsCategory && (
+                  <div
                     css={css`
-                      font-size: 28px;
+                      display: flex;
+                      gap: 12px;
                     `}
                   >
-                    Tin Thị trường
-                  </Typography>
-                </div>
-                {/* {data && data.posts && data.posts.length >= 1 && (
-                  <NewBox3 newsList1={data.posts[0]} />
-                )} */}
+                    <img src={getImageUrl(data.newsCategory.iconUrl)} alt="" />
+                    <Typography
+                      variant="h3"
+                      component={"h3"}
+                      css={css`
+                        font-size: 28px;
+                      `}
+                    >
+                      {data.newsCategory.name}
+                    </Typography>
+                  </div>
+                )}
                 {data &&
-                  data.posts &&
-                  data.posts.map((item, index) => (
-                    <div key={index}>
-                      <NewBox3 key1={item.id} newsList1={item.posts} />
-                    </div>
+                  data.newsList &&
+                  data.newsList.items.map((item) => (
+                    <NewsBox3 news={item} key={item.id} />
                   ))}
+
+                <Pagination
+                  count={
+                    totalCount == 0 ? 0 : Math.ceil(totalCount / rowsPerPage)
+                  }
+                  page={page}
+                  onChange={handleChange}
+                />
+                {/* {data && data.posts && data.posts.length >= 1 && (
+                  <NewsBox3 newsList1={data.posts[0]} />
+                )} */}
+                {/* {data &&
+                  data.viewMore &&
+                  data.viewMore.map((item, index) => (
+                    <div key={index}>
+                      <NewsBox3 key1={item.id} newsList1={item} />
+                    </div>
+                  ))} */}
               </div>
             </Grid>
             <Grid item xs={4}>

@@ -99,7 +99,7 @@ function RightNewsBox(props) {
             </div>
             <div
               css={css`
-                width: 309px;
+                width: 100%;
                 height: 1px;
                 background: #dddfe1;
                 margin: 16px 0;

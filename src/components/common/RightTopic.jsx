@@ -77,13 +77,14 @@ function RightTopic(props) {
                       color: rgba(39, 110, 241);
                       text-transform: capitalize;
                       display: inline-block;
+                      text-decoration: none;
 
                       &:hover {
                         color: white;
                       }
                     `}
                   >
-                    # {item}
+                    {item}
                   </span>
                 </Button>
               </Stack>
