@@ -1,16 +1,9 @@
 // http là giống như fetch nhưng hiện tại là dùng axios để thay thế cho fetch
 import http from "../utils/http";
 
-export function getHomeTopData() {
+export function getHomeData() {
   return http({
-    url: `/api/services/app/Home/GetHomeTopData`,
-    method: "get",
-  });
-}
-
-export function getHomeBottomData() {
-  return http({
-    url: `/api/services/app/Home/GetHomeBottomData`,
+    url: `/home-page/getHomeData`,
     method: "get",
   });
 }

@@ -26,16 +26,12 @@ import getImageUrl from "../../utils/getImage";
 import { Typography } from "@mui/material";
 import RightCategory from "../../components/common/RightCategory";
 
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
-
+import SearchPanel from "../../components/common/SearchPanel";
 // import { useParams } from "react-router-dom";
 
 const RenderNews = (props) => {
   const { newsList } = props;
   if (!newsList || newsList.newsList < 1) return <></>;
-  console.log(newsList);
   const array = [...newsList];
   const firstItem = array.shift();
   return (
@@ -163,7 +159,7 @@ const NewsPage = () => {
       <ContainerContent>
         <Box>
           <Grid container spacing={6}>
-            <Grid item xs={8}>
+            <Grid item xs={12} md={6} lg={8}>
               <div>
                 {data &&
                   data.newsList &&
@@ -206,29 +202,8 @@ const NewsPage = () => {
                 {/* <SupposedBox /> */}
               </div>
             </Grid>
-            <Grid item xs={4}>
-              <Paper
-                component="form"
-                sx={{
-                  p: "2px 4px",
-                  display: "flex",
-                  alignItems: "center",
-                  width: 400,
-                }}
-              >
-                <InputBase
-                  sx={{ ml: 1, flex: 1 }}
-                  placeholder="Nhập từ khóa bạn cần tìm"
-                  inputProps={{ "aria-label": "Nhập từ khóa bạn cần tìm" }}
-                />
-                <IconButton
-                  type="button"
-                  sx={{ p: "10px" }}
-                  aria-label="search"
-                >
-                  <SearchIcon color="secondary" />
-                </IconButton>
-              </Paper>
+            <Grid item xs={12} md={6} lg={4}>
+              <SearchPanel />
               <RightCategory postCategory={data && data.postCategory} />
               <RightTopic postTags={data && data.postTags} />
               <RightNewsBox

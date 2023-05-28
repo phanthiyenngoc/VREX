@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const http = axios.create({
-  baseURL: "https://api.vrex.vn",
+  baseURL: "https://api-vrex.vercel.app",
   timeout: 5000,
 });
 
@@ -10,12 +10,12 @@ http.interceptors.request.use(
     //   if (store.getters['user/token']) {
     //     config.headers["Authorization"] = "Bearer " + token;
     //   }
-    config.headers["Abp.TenantId"] = 1;
+    // config.headers["Abp.TenantId"] = 1;
 
     config.params = {
       ...config.params,
-      culture: "vi",
-      "ui-culture": "vi-VN",
+      // culture: "vi",
+      // "ui-culture": "vi-VN",
     };
 
     return config;

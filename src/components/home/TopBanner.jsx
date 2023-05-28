@@ -37,7 +37,7 @@ const TopBanner = (props) => {
           {homeTopBanners.map((p, index) => (
             <SwiperSlide key={index}>
               <img
-                src={getImageUrl(p.bannerUrl, 1920)}
+                src={getImageUrl(p.bannerUrl)}
                 css={css`
                   width: 100%;
                 `}

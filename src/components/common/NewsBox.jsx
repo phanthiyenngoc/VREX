@@ -13,7 +13,8 @@ NewsBox.propTypes = {
 function NewsBox(props) {
   const { news, width, height } = props;
   return (
-    <Link to={`/tin-tuc/${news.id}`}>
+    // <Link to={`/tin-tuc/${news.id}`}>
+    <Link to={`/post/${news.id}`}>
       <div
         css={css`
           position: relative;

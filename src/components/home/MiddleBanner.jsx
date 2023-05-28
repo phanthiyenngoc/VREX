@@ -4,8 +4,26 @@ import getImageUrl from "../../utils/getImage";
 import { css } from "@emotion/react";
 import CommonButton from "../common/CommonButton";
 
-const MiddleBanner = (props) => {
+import { useTheme, useMediaQuery } from "@mui/material";
+Desktop.propTypes = {
+  homeMiddle1Banner: PropTypes.object,
+};
+Mobile.propTypes = {
+  homeMiddle1Banner: PropTypes.object,
+};
+function Mobile(props) {
   const { homeMiddle1Banner } = props;
+  return (
+    <>
+      <div>
+        <img src={getImageUrl(homeMiddle1Banner.mobileBannerUrl, 335)} alt="" />
+      </div>
+    </>
+  );
+}
+function Desktop(props) {
+  const { homeMiddle1Banner } = props;
+
   return (
     <div
       css={css`
@@ -18,7 +36,11 @@ const MiddleBanner = (props) => {
             position: relative;
           `}
         >
-          <img css={css``} src={getImageUrl(homeMiddle1Banner.bannerUrl, 1180)} alt="" />
+          <img
+            css={css``}
+            src={getImageUrl(homeMiddle1Banner.bannerUrl, 1180)}
+            alt=""
+          />
           <div
             css={css`
               position: absolute;
@@ -96,6 +118,21 @@ const MiddleBanner = (props) => {
         </div>
       </ContainerContent>
     </div>
+  );
+}
+
+const MiddleBanner = (props) => {
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(
+    `(min-width:${theme.breakpoints.values.lg}px)`
+  );
+  if (isDesktop) return <Desktop homeMiddle1Banner={props.homeMiddle1Banner} />;
+
+  return (
+    <>
+      Mobile
+      <Mobile homeMiddle1Banner={props.homeMiddle1Banner} />
+    </>
   );
 };
 

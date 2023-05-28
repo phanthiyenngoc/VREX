@@ -4,15 +4,30 @@ import { css } from "@emotion/react";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
 const listButtons = ["Mua bán", "Cho thuê", "Sang nhượng", "Dự án"];
 
 const SearchBanner = () => {
   const [activeBtn, setActiveBtn] = useState("Mua bán");
   const handleActiveBtn = (btnName) => {
     setActiveBtn(btnName);
+  };
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    // navigate(`/tin-tuc/tim-kiem?filterKeyword=${search}`);
+    navigate(`/tim-kiem-tin-dang?filterKeyword=${search}`);
+  };
+
+  const keyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleSearch();
+    }
   };
 
   return (
@@ -113,6 +128,7 @@ const SearchBanner = () => {
               height: 24px;
               border: none;
               background: #f6f6f6;
+              outline: none;
               &::placeholder {
                 font-weight: 400;
                 font-size: 14px;
@@ -122,8 +138,12 @@ const SearchBanner = () => {
             `}
             type="text"
             placeholder="Nhập từ khóa bạn cần tìm"
+            vualue={search}
+            onChange={(e) => setSearch(e.tag.value)}
+            onKeyDown={(event) => keyDown(event)}
           ></Typography>
-          <span
+          <div
+            onClick={() => handleSearch()}
             css={css`
               display: inline-flex;
               justify-content: center;
@@ -133,10 +153,22 @@ const SearchBanner = () => {
               background: #f37506;
               border-radius: 0px 4px 4px 0px;
               cursor: pointer;
+              border: none;
             `}
           >
-            <img src={search} alt="" />
-          </span>
+            <IconButton
+              type="button"
+              sx={{ p: "10px" }}
+              aria-label="search"
+              onClick={() => handleSearch()}
+            >
+              <SearchIcon
+                css={css`
+                  color: white;
+                `}
+              />
+            </IconButton>
+          </div>
         </div>
         <div
           css={css`

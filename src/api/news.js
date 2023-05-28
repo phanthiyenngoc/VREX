@@ -86,7 +86,13 @@ export function getUIPostViewMore(newsid) {
   });
 }
 
-export function getUIPostList(postCategoryId, page, rowsPerPage) {
+export function getUIPostList(
+  postCategoryId,
+  page,
+  rowsPerPage,
+  filterKeyword,
+  tag
+) {
   //Danh sách bài viết
   return http({
     url: `/api/services/app/Post/GetUIPostList`,
@@ -95,7 +101,9 @@ export function getUIPostList(postCategoryId, page, rowsPerPage) {
       postCategoryId: postCategoryId,
       postType: 0, //loại bài post
       page: page, // trang hiện tại
-      rowsPerPage: rowsPerPage, // so luong item trong 1 trang
+      rowsPerPage: rowsPerPage, // so luong item trong 1 trang,
+      filterKeyword: filterKeyword,
+      tag: tag,
     },
   });
 }

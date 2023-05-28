@@ -2,12 +2,18 @@ import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 import ErrorPage from "../pages/Error";
 import Loader from "../components/common/Loader";
+import PostPage from "../pages/post";
+import DetailPost from "../pages/post/detailPost";
+import SearchPost from "../pages/post/SearchPost";
+import PostCategory from "../pages/post/PostCategory";
+import ListingSearch from "../pages/listing/ListingSearch";
 
 const HomeLayout = lazy(() => import("../layouts/HomeLayout.jsx")); //lười khi nào cần mới tải component
 const HomePage = lazy(() => import("../pages/home/index.jsx"));
 const NewsPage = lazy(() => import("../pages/news/index.jsx"));
 const NewsDetail = lazy(() => import("../pages/news/detail.jsx"));
 const NewsCategory = lazy(() => import("../pages/news/news-category.jsx"));
+const SearchNews = lazy(() => import("../pages/news/search.jsx"));
 
 const ListingPage = lazy(() => import("../pages/listing/index.jsx"));
 const UserProfileLayout = lazy(() =>
@@ -20,7 +26,7 @@ const router = createBrowserRouter(
     {
       path: "/",
       element: <HomeLayout />,
-      errorElement: <ErrorPage />,
+
       children: [
         {
           path: "/",
@@ -31,7 +37,7 @@ const router = createBrowserRouter(
           ),
         },
         {
-          path: "/tin-tuc",
+          path: "/tin-tuc", // Trang index
           element: (
             <Loader>
               <NewsPage />
@@ -39,7 +45,39 @@ const router = createBrowserRouter(
           ),
         },
         {
-          path: "/tin-tuc/:newsId",
+          path: "/post", // Trang demo
+          element: (
+            <Loader>
+              <PostPage />
+            </Loader>
+          ),
+        },
+        {
+          path: "/post/:newsId",
+          element: (
+            <Loader>
+              <DetailPost />
+            </Loader>
+          ),
+        },
+        {
+          path: "/post/tim-kiem", // Trang tìm kiếm tin tức
+          element: (
+            <Loader>
+              <SearchPost />
+            </Loader>
+          ),
+        },
+        {
+          path: "/danh-muc-bai-post/:newsCategoryId", //Trang danh mục tin tức
+          element: (
+            <Loader>
+              <PostCategory />
+            </Loader>
+          ),
+        },
+        {
+          path: "/tin-tuc/:newsId", // Trang chi tiết tin tức
           element: (
             <Loader>
               <NewsDetail />
@@ -47,7 +85,24 @@ const router = createBrowserRouter(
           ),
         },
         {
-          path: "/danh-muc-tin-tuc/:newsCategoryId",
+          path: "/tin-tuc/tim-kiem", // Trang tìm kiếm tin tứcBẤT ĐỘNG SẢ
+          element: (
+            <Loader>
+              <SearchNews />
+            </Loader>
+          ),
+        },
+        {
+          path: "/tim-kiem-tin-dang", // Trang tìm kiếm tin tức
+          element: (
+            <Loader>
+              <ListingSearch />
+            </Loader>
+          ),
+        },
+
+        {
+          path: "/danh-muc-tin-tuc/:newsCategoryId", //Trang danh mục tin tức
           element: (
             <Loader>
               <NewsCategory />
@@ -60,6 +115,14 @@ const router = createBrowserRouter(
           element: (
             <Loader>
               <ListingPage />
+            </Loader>
+          ),
+        },
+        {
+          path: "/",
+          element: (
+            <Loader>
+              <ListingSearch />
             </Loader>
           ),
         },

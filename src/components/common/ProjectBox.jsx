@@ -38,7 +38,7 @@ function ProjectBox(props) {
   return (
     <div
       css={css`
-        max-width: 380px;
+        /* max-width: 380px; */
         position: relative;
       `}
     >

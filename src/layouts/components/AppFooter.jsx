@@ -52,6 +52,9 @@ function AppFooter() {
           css={css`
             display: flex;
             gap: 89px;
+            @media (max-width: ${theme.breakpoints.values.lg - 1}px) {
+              flex-wrap: wrap;
+            }
           `}
         >
           <ul>
@@ -441,7 +444,8 @@ function AppFooter() {
             margin-bottom: 24px;
           `}
         >
-          © 2021 - Vrex.vn. MST: 0319886988 - Sở KHĐT TP Hồ Chí Minh cấp ngày 11/07/2019
+          © 2021 - Vrex.vn. MST: 0319886988 - Sở KHĐT TP Hồ Chí Minh cấp ngày
+          11/07/2019
         </Typography>
       </div>
     </footer>

@@ -29,6 +29,24 @@ NewsCategory.propTypes = {
   newsList: PropTypes.array,
 };
 
+// function TodoList() {
+//   const[ todoList, setTodoList] = useState(['love', 'easy', 'frontend']);
+//   function removeTodo(index){
+//     const newTodoList = [...todoList];
+
+//     newTodoList.splice(index, 1);
+//     setTodoList(newTodoList);
+//   }
+//   return (
+//     <ul>
+//       {todoList.map((todo, index)=>(
+//         <li key={todo.id}
+//         onClick={()=>removeTodo(index)}>{todo.title}</li>
+//       ))}
+//     </ul>
+//   )
+// }
+
 function NewsCategory() {
   let { newsCategoryId } = useParams();
   const [page, setPage] = useState(1);
